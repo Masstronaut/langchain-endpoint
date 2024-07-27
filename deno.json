@@ -1,0 +1,21 @@
+{
+	"imports": {
+		"@langchain/core": "npm:@langchain/core@^0.2.17",
+		"@langchain/langgraph": "npm:@langchain/langgraph@^0.0.29",
+		"@langchain/openai": "npm:@langchain/openai@^0.2.4",
+		"@std/dotenv": "jsr:@std/dotenv@^0.224.0",
+		"drizzle-kit": "npm:drizzle-kit@^0.23.0",
+		"drizzle-orm": "npm:drizzle-orm@^0.32.0",
+		"langchain": "npm:langchain@^0.2.10",
+		"nanoid": "npm:nanoid@^5.0.7",
+		"postgres": "https://deno.land/x/postgresjs@v3.4.4/mod.js",
+		"zod": "npm:zod@^3.23.8"
+	},
+	"compilerOptions": { "lib": ["deno.window"] },
+	"tasks": {
+		"start": "deno run --allow-env --allow-net --allow-read --env src/server.ts",
+		"build": "deno compile --allow-env --allow-net --allow-read --env --output build/server src/server.ts",
+		"migrate:generate": "deno run --allow-env --allow-net --allow-read --env --node-modules-dir npm:drizzle-kit generate",
+		"migrate:apply": "deno run --allow-env --allow-net --allow-read --env src/db/migrate.ts"
+	}
+}

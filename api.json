@@ -1,0 +1,68 @@
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "Improv Skit API",
+		"version": "1.0.0",
+		"description": "API for orchestrating improv skits using OpenAI's gpt-4o-mini model."
+	},
+	"paths": {
+		"/skit": {
+			"post": {
+				"summary": "Create an improv skit",
+				"description": "Orchestrates OpenAI's gpt-4o-mini model into a trio of comedians who will perform an improv skit based on the provided scenario.",
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"scenario": {
+										"type": "string",
+										"description": "A scenario for the improv skit",
+										"example": "A software engineer applies for a job at an AI startup"
+									},
+									"thread_id": {
+										"type": "string",
+										"description": "Optional ID of a previous conversation thread to continue the skit",
+										"example": "thread_someThread123"
+									}
+								},
+								"required": ["scenario"]
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successful response with the skit",
+						"content": {
+							"text/event-stream": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Bad request, e.g., missing scenario field",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"error": {
+											"type": "string",
+											"description": "Error message"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {}
+}
